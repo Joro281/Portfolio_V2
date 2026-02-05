@@ -27,8 +27,8 @@ export default async function ProjectPage({
 
     return (
         <div className="text-white min-h-screen flex flex-col font-display selection:bg-white selection:text-black overflow-x-hidden relative">
-            {/* Scroll Progress - Kept as it's specific to project detail reading */}
-            <div className="fixed top-0 left-0 w-full z-[60]">
+            {/* Scroll Progress - Integrated with sub-nav height */}
+            <div className="fixed top-0 left-0 w-full h-20 z-[60] pointer-events-none">
                 <ScrollProgress />
             </div>
 

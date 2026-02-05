@@ -26,8 +26,8 @@ export default function ScrollProgress() {
         <>
             <div className="absolute inset-0 pointer-events-none">
                 <div className="max-w-[1600px] mx-auto px-6 h-full flex items-center justify-end">
-                    <span className="font-mono text-xs text-neutral-500 tabular-nums">
-                        [ {Math.round(progress)} % ]
+                    <span className="font-mono text-[10px] text-neutral-400 tabular-nums uppercase tracking-widest whitespace-nowrap">
+                        [ {Math.round(progress)}% ]
                     </span>
                 </div>
             </div>
