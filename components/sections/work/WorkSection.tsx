@@ -1,14 +1,26 @@
 'use client';
 
-import { useState } from "react";
+import * as React from "react";
 import Link from "next/link";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import TextMorph from "@/components/shared/TextMorph";
 import MediaLoader from "@/components/shared/MediaLoader";
 import { projects, ProjectData } from "@/data/projectsData";
 
 export default function WorkSection() {
-    const [currentPage, setCurrentPage] = useState(1);
+    const searchParams = useSearchParams();
+    const router = useRouter();
+    const pathname = usePathname();
+    const [hoveredProjectId, setHoveredProjectId] = React.useState<string | null>(null);
+
+    const currentPage = Number(searchParams.get('page')) || 1;
     const ITEMS_PER_PAGE = 4;
+
+    const handlePageChange = (page: number) => {
+        const params = new URLSearchParams(searchParams.toString());
+        params.set('page', page.toString());
+        router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    };
 
     const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
     const displayedProjects = projects.slice(
@@ -45,6 +57,8 @@ export default function WorkSection() {
                 {displayedProjects.map((project, index) => (
                     <div
                         key={project.id}
+                        onMouseEnter={() => setHoveredProjectId(project.id)}
+                        onMouseLeave={() => setHoveredProjectId(null)}
                         className="project-row group/row relative border-b border-white py-8 md:py-12 flex flex-col md:flex-row md:items-center gap-6 md:gap-0"
                     >
                         {/* ID Number */}
@@ -54,7 +68,7 @@ export default function WorkSection() {
 
                         {/* Project Title */}
                         <div className="flex-grow relative order-1 md:order-none">
-                            <Link href={`/work/${project.slug}`} className="w-fit block">
+                            <Link href={`/work/${project.slug}?page=${currentPage}`} className="w-fit block">
                                 <TextMorph
                                     as="h2"
                                     text={project.title}
@@ -70,7 +84,7 @@ export default function WorkSection() {
                                 <TextMorph text={`${project.year} / ${project.category}`} delay={index * 100 + 100} />
                             </div>
                             <Link
-                                href={`/work/${project.slug}`}
+                                href={`/work/${project.slug}?page=${currentPage}`}
                                 className="font-mono text-xs flex items-center gap-2 hover:bg-white hover:text-black transition-all px-2 py-1"
                             >
                                 <TextMorph text="VIEW" delay={index * 100 + 150} />
@@ -80,7 +94,7 @@ export default function WorkSection() {
 
                         {/* Hover Preview - Perfectly Centered in Row */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-max h-max opacity-0 invisible group-hover/row:opacity-100 group-hover/row:visible transition-all duration-300 pointer-events-none z-40 hidden md:block">
-                            <ProjectPreview project={project} />
+                            <ProjectPreview project={project} isVisible={hoveredProjectId === project.id} />
                         </div>
                     </div>
                 ))}
@@ -91,7 +105,7 @@ export default function WorkSection() {
                 {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                     <button
                         key={page}
-                        onClick={() => setCurrentPage(page)}
+                        onClick={() => handlePageChange(page)}
                         className={`uppercase tracking-widest px-1 transition-all duration-200 ${currentPage === page
                             ? 'bg-white text-black'
                             : 'text-white hover:bg-white hover:text-black'
@@ -105,19 +119,34 @@ export default function WorkSection() {
     );
 }
 
-function ProjectPreview({ project }: { project: ProjectData }) {
+function ProjectPreview({ project, isVisible }: { project: ProjectData, isVisible: boolean }) {
+    const [hasStartedLoading, setHasStartedLoading] = React.useState(false);
+
+    // Persist loading state once it has been seen once
+    if (isVisible && !hasStartedLoading) {
+        setHasStartedLoading(true);
+    }
+
     return (
         <div className="relative p-2 bg-zinc-900 border border-white/20 shadow-2xl overflow-hidden min-w-[300px]">
-            <MediaLoader
-                video={project.video}
-                image={project.image}
-                alt={project.title}
-                aspectRatio={project.video ? 'video' : 'auto'}
-                className="h-56 md:h-64 w-auto max-w-[40vw]"
-            />
-            <div className="absolute bottom-4 right-4 font-mono text-[8px] uppercase tracking-widest bg-black/60 px-2 py-1 border border-white/10 z-20">
-                {project.video ? 'Motion Preview' : 'Static Preview'}
-            </div>
+            {hasStartedLoading ? (
+                <>
+                    <MediaLoader
+                        video={project.video}
+                        image={project.image}
+                        alt={project.title}
+                        aspectRatio={project.video ? 'video' : 'auto'}
+                        className="h-56 md:h-64 w-auto max-w-[40vw]"
+                    />
+                    <div className="absolute bottom-4 right-4 font-mono text-[8px] uppercase tracking-widest bg-black/60 px-2 py-1 border border-white/10 z-20">
+                        {project.video ? 'Motion Preview' : 'Static Preview'}
+                    </div>
+                </>
+            ) : (
+                <div className="h-56 md:h-64 w-full flex items-center justify-center bg-zinc-800/50 font-mono text-[8px] uppercase tracking-widest opacity-20">
+                    PREPARING_PREVIEW...
+                </div>
+            )}
         </div>
     );
 }

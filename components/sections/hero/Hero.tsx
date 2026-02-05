@@ -43,50 +43,9 @@ export default function Hero() {
   };
 
   return (
-    <section className="w-full min-h-screen flex flex-col items-center justify-center relative pt-32 md:pt-40 lg:pt-0 bg-black overflow-hidden">
-      {/* TV Static/Scanline Effect */}
-
-      {/* CRT Scanlines */}
-      <div
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{
-          backgroundImage: `
-            repeating-linear-gradient(
-              0deg,
-              rgba(0, 0, 0, 0.15) 0px,
-              rgba(0, 0, 0, 0.15) 1px,
-              transparent 1px,
-              transparent 2px
-            )
-          `,
-          backgroundSize: '100% 4px',
-          opacity: 0.3,
-        }}
-      />
-
-      {/* Gradient TV Noise */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none gradient-tv-noise z-10" style={{ mixBlendMode: 'screen' }} />
-
-      {/* Vignette Effect */}
-      <div
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%)',
-          opacity: 0.4,
-        }}
-      />
-
-      {/* Flickering Light Effect */}
-      <div
-        className="absolute inset-0 w-full h-full pointer-events-none animate-tv-flicker"
-        style={{
-          background: 'rgba(255, 255, 255, 0.02)',
-          mixBlendMode: 'overlay',
-        }}
-      />
-
+    <section className="w-full min-h-screen flex flex-col items-center justify-center relative pt-32 md:pt-40 lg:pt-0 overflow-hidden">
       <motion.div
-        className="w-full max-w-[1600px] mx-auto px-6 h-full flex flex-col lg:flex-row items-center relative"
+        className="w-full max-w-[1600px] mx-auto px-6 h-full flex flex-col lg:flex-row items-center relative z-20"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
@@ -146,32 +105,31 @@ export default function Hero() {
                   duration={2000}
                   as="span"
                 />
-                <span className="text-white">
-                  <TextMorph
-                    text="I build systems, not just pages."
-                    delay={1200}
-                    duration={1800}
-                    as="span"
-                  />
-                </span>
+                <TextMorph
+                  text="- I build systems, not just pages. -"
+                  delay={1200}
+                  duration={1800}
+                  as="span"
+                  className="text-black font-bold brush-highlight ml-4"
+                />
               </p>
 
               <motion.div
-                className="flex flex-wrap items-center gap-6 mt-8 pl-4"
+                className="flex flex-wrap items-center gap-4 mt-8 pl-4"
                 variants={itemVariants}
               >
                 <Link
-                  className="text-sm font-bold uppercase tracking-wider border-b-2 border-white pb-1 hover:border-neutral-500 transition-colors"
+                  className="relative font-mono text-xs uppercase tracking-[0.2em] transition-all duration-200 px-3 py-1 text-white hover:bg-white hover:text-black"
                   href="/work"
                 >
-                  VIEW WORKS
+                  [ VIEW WORKS ]
                 </Link>
                 <span className="text-neutral-600">/</span>
                 <Link
-                  className="text-sm font-bold uppercase tracking-wider border-b-2 border-transparent pb-1 hover:border-white text-neutral-400 hover:text-white transition-colors"
+                  className="relative font-mono text-xs uppercase tracking-[0.2em] transition-all duration-200 px-3 py-1 text-white hover:bg-white hover:text-black"
                   href="/contact"
                 >
-                  GET IN TOUCH
+                  [ GET IN TOUCH ]
                 </Link>
               </motion.div>
             </motion.div>
@@ -191,7 +149,6 @@ export default function Hero() {
           </motion.div>
         </div>
       </motion.div>
-
     </section>
   );
 }

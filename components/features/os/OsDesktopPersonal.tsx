@@ -48,7 +48,7 @@ export default function OsDesktopPersonal() {
             </div>
 
             {/* Desktop Icons Area */}
-            <div className="relative z-10 flex-1 p-6 grid grid-cols-1 gap-6 content-start justify-items-start">
+            <div className="relative z-10 flex-1 p-6 flex flex-row lg:flex-col gap-4 lg:gap-6 content-start justify-items-start overflow-x-auto lg:overflow-visible">
                 <OsIcon
                     label="BIO.txt"
                     icon={FileText}

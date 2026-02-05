@@ -59,7 +59,7 @@ export const projects: ProjectData[] = [
         type: 'Personal Project',
         icon: 'terminal',
         image: luxuryPresenceImg, // Using luxuryPresence as a placeholder
-        video: '/images/portfolio_v2.mp4',
+        video: '/images/portfolio_v2.webm',
         overview: 'A modern, brutalist portfolio website showcasing selected works with a focus on clean typography, smooth animations, and optimal user experience. Built with Next.js 14, TypeScript, and Tailwind CSS.',
         problem: 'The previous portfolio lacked visual impact and failed to effectively communicate the breadth of technical expertise. The interface needed to be both aesthetically striking and functionally efficient, while maintaining fast load times and accessibility standards.',
         solution: 'Adopted a brutalist design philosophy with monochromatic aesthetics, custom text morph animations, and a modular component architecture. Implemented server-side rendering for optimal performance and SEO.',
@@ -88,7 +88,7 @@ export const projects: ProjectData[] = [
         type: 'Real Estate Platform',
         icon: 'apartment',
         image: luxuryPresenceImg,
-        video: '/images/luxury_presence.mp4',
+        video: '/images/luxury_presence.webm',
         overview: 'This project was a Web Builder assignment designed to test aptitude, comprehension, resourcefulness, and creativity. The challenge was to revamp the "Home" page of a real estate website within 3 days, ensuring the result was simple, elegant, and professional.',
         problem: 'The goal was to improve the design of the current website rather than just copying it, while using all existing content and images. Given the nature of the real estate market, the design approach focused on "Premium Elegance" to create a user interface that feels luxurious and trustworthy.',
         solution: 'The webpage was built as a single-page application utilizing GSAP and Motion.dev for advanced animations and parallax designs. I implemented custom CSS for sophisticated styling effects and ensured the structure was semantic and accessible.',
@@ -119,7 +119,7 @@ export const projects: ProjectData[] = [
         type: 'SaaS Platform',
         icon: 'architecture',
         image: sitebuiltDashboardImg,
-        video: '/images/sitebuilt.mp4',
+        video: '/images/sitebuilt.webm',
         overview: 'SiteBuilt is an intelligent construction-documentation platform that transforms everyday site photos into photo-verified, accurate As-Built drawings — automatically, and in minutes. It replaces the slow, manual process of marking up floor plans and linking photos.',
         problem: 'Construction projects face significant delays due to manual permit reviews and disconnected communication channels. Field Engineers and BIM Teams historically struggle with the manual labor required to anchor site reality to digital documentation.',
         solution: 'Developed an automated system that bridges the gap between site photos and digital drawings. Featuring an intuitive upload interface, an interactive pinning canvas for precise photo placement, and a dynamic dashboard for instant report generation.',
@@ -150,7 +150,7 @@ export const projects: ProjectData[] = [
         type: 'Medical Platform',
         icon: 'medical_services',
         image: null,
-        video: '/images/mase.mp4',
+        video: '/images/mase.webm',
         overview: 'Mase is a multi-modular Hospital Management System. While the platform covers a broad range of healthcare operations, my contribution focused on building the robust Recruitment/Job Posting engine and the comprehensive Quality Assurance infrastructure.',
         problem: 'The agency needed a scalable way to manage staff recruitment and ensure the stability of a complex healthcare platform with multiple user roles and sensitive data.',
         solution: 'Implemented a dynamic Job Posting and Recruitment module to streamline hiring. Simultaneously, I developed an automated Quality Assurance (QA) suite to verify system integrity, API reliability, and role-based accessibility across the entire platform.',
@@ -162,7 +162,7 @@ export const projects: ProjectData[] = [
         ],
         outcome: 'Successfully delivered the Recruitment and QA modules, which are currently operational and working as intended. These core components provide the foundation for the agency\'s staff expansion while ensuring the underlying system remains robust and error-free.',
         figures: [
-            { caption: 'Automated Quality Assurance Testing', section: 'solution', icon: 'fact_check', video: '/images/mase_qa.mp4' }
+            { caption: 'Automated Quality Assurance Testing', section: 'solution', icon: 'fact_check', video: '/images/mase_qa.webm' }
         ],
         resources: {
             demo: 'https://mase-ai-intaligence.vercel.app/',
@@ -181,7 +181,7 @@ export const projects: ProjectData[] = [
         type: 'Online Store',
         icon: 'store',
         image: null,
-        video: '/images/bengals.mp4',
+        video: '/images/bengals.webm',
         overview: "Bengals is a premium seafood delivery business that carries the ocean's best — freshly caught fish, shrimp, crabs, and other premium seafood — straight from General Santos City. Each catch is carefully handled and delivered to partners in Cagayan de Oro.",
         problem: 'Developing a modern digital presence to showcase their business and facilitate an intuitive online ordering system for business partners who value unmatched freshness and quality.',
         solution: 'Developed a high-performance website using Next.js and React, featuring a modern, seafood-themed design. The platform includes a detailed product catalog with high-quality imagery and a user-friendly interface optimized for both desktop and mobile field usage.',
@@ -193,7 +193,7 @@ export const projects: ProjectData[] = [
         ],
         outcome: 'Successfully created a digital bridge between General Santos fishing fleets and Cagayan de Oro businesses. The platform simplifies customer inquiries and ensures a professional brand image that reflects the premium nature of the catch.',
         figures: [
-            { caption: 'Intuitive E-commerce Ordering Workflow', section: 'solution', icon: 'shopping_cart', video: '/images/bengals_order.mp4' }
+            { caption: 'Intuitive E-commerce Ordering Workflow', section: 'solution', icon: 'shopping_cart', video: '/images/bengals_order.webm' }
         ],
         resources: {
             demo: 'https://bengals.vercel.app',
@@ -212,7 +212,7 @@ export const projects: ProjectData[] = [
         type: 'Mental Health App',
         icon: 'psychology',
         image: null,
-        video: '/images/mindbloom.mp4',
+        video: '/images/mindbloom.webm',
         overview: 'MindBloom was developed to provide a comprehensive platform for mental health support, featuring mood tracking, meditation guides, journaling capabilities, and professional resources. The platform aims to make mental health resources accessible and user-friendly for people of all ages.',
         problem: 'Mental health awareness systems are crucial in today\'s fast-paced world, yet many tools feel clinical or inaccessible. There was a need for an intuitive, welcoming platform that encourages consistent mood tracking and mindfulness.',
         solution: 'Built a comprehensive wellness platform using Next.js and React with a focus on a calming UI/UX and accessibility. Implemented secure journaling systems, guided meditation flows, and interactive mood analytics to prioritize a supportive user experience.',
@@ -241,7 +241,7 @@ export const projects: ProjectData[] = [
         type: 'Personal Project',
         icon: 'folder_open',
         image: null,
-        video: '/images/portfolio_v1.mp4',
+        video: '/images/portfolio_v1.webm',
         overview: 'A comprehensive personal portfolio website developed using modern web technologies to showcase technical skills, academic achievements, and professional projects. The platform serves as a centralized hub for cross-device technical demonstrations.',
         problem: 'Needed a professional online presence that effectively reflects technical capabilities through a modern, interactive user experience. The previous lack of a centralized platform made it difficult to display a cohesive narrative of growth and expertise.',
         solution: 'Leveraged Next.js 15 for server-side rendering and React 19 for a maintainable component architecture. Implemented rapid styling with Tailwind CSS and ensured full type safety with TypeScript, following an iterative design process from wireframing to user testing.',
@@ -253,7 +253,7 @@ export const projects: ProjectData[] = [
         ],
         outcome: 'Successfully established a robust digital brand that achieves fast loading times and optimal SEO performance. The site functions as a live demonstration of proficiency in modern frontend frameworks and responsive design principles.',
         figures: [
-            { caption: 'Interactive Project Showcase Layout', section: 'solution', icon: 'web', video: '/images/portfoli_v1_projects.mp4' }
+            { caption: 'Interactive Project Showcase Layout', section: 'solution', icon: 'web', video: '/images/portfoli_v1_projects.webm' }
         ],
         resources: {
             demo: 'https://joro-portfolio.vercel.app/',
@@ -302,7 +302,7 @@ export const projects: ProjectData[] = [
         type: 'Fleet Management',
         icon: 'local_gas_station',
         image: null,
-        video: '/images/fuel_request.mp4',
+        video: '/images/fuel_request.webm',
         overview: 'Developed for the Provincial Engineering Office of Misamis Oriental, this system digitizes fuel and service requests for government vehicles, replacing manual, paper-based processes with an efficient online workflow.',
         problem: 'Inefficiencies in managing service and fuel requests due to manual tracking led to bottlenecks and a lack of accountability. The paper-based system made real-time monitoring of fuel allocation and vehicle maintenance nearly impossible.',
         solution: 'Built a robust management platform using PHP/Node.js and MySQL with role-based access for employees and admins. Implemented automated request workflows, real-time inventory tracking for fuel and supplies, and comprehensive dashboard analytics for consumption trends.',
@@ -331,7 +331,7 @@ export const projects: ProjectData[] = [
         type: 'IoT Vehicle',
         icon: 'smart_toy',
         image: null,
-        video: '/images/robocar.mp4',
+        video: '/images/robocar.webm',
         overview: 'RoboCar is a real-time RC surveillance vehicle designed for hazardous gas detection in industrial and mining environments. Built with Raspberry Pi, it enables safe remote inspection through live video and multi-sensor gas monitoring.',
         problem: 'Traditional air quality monitoring systems are often static and expensive, failing to provide mobile coverage in high-risk zones. Workers are frequently exposed to hazardous gases like LPG and methane during manual site inspections.',
         solution: 'Developed a mobile monitoring platform featuring MQ-series sensors (MQ2, MQ3, MQ6) integrated with Raspberry Pi 4B and ESP32. Implemented a Python-based processing engine for real-time gas concentration analysis and a web dashboard for live video streaming and remote navigation control.',
@@ -362,7 +362,7 @@ export const projects: ProjectData[] = [
         type: 'Agri-Tech',
         icon: 'sensors',
         image: null,
-        video: '/images/bird_detection.mp4',
+        video: '/images/bird_detection.webm',
         overview: 'An Automated Bird Detection and Repeller System developed using the ESP32 microcontroller, PIR motion sensors, and predator sound emitters. Designed to protect rice fields from crop damage caused by birds like the Maya bird.',
         problem: 'Traditional methods for bird-scaring in agriculture are labor-intensive and inefficient. Farmers manually shout or use noisy objects, which fails to provide consistent 24/7 protection against substantial crop losses.',
         solution: 'Developed a smart IoT solution using ESP32 and PIR motion sensors (5m–12m range). The system triggers an MP3 module to emit amplified predator sounds (e.g., eagle calls) through a 15W speaker. Integrated Firebase for real-time detection logging and Blynk for remote monitoring.',

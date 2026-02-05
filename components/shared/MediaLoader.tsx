@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image, { type StaticImageData } from 'next/image';
 import MediaSkeleton from './MediaSkeleton';
 
@@ -28,6 +28,17 @@ export default function MediaLoader({
     fit = 'cover'
 }: MediaLoaderProps) {
     const [isLoading, setIsLoading] = useState(true);
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    // Ensure we handle cases where media might already be loaded (e.g., from cache)
+    useEffect(() => {
+        const checkReady = () => {
+            if (video && videoRef.current && videoRef.current.readyState >= 3) {
+                setIsLoading(false);
+            }
+        };
+        checkReady();
+    }, [video]);
 
     return (
         <div className={`relative w-full h-full overflow-hidden ${className}`}>
@@ -40,10 +51,12 @@ export default function MediaLoader({
 
             {video ? (
                 <video
+                    ref={videoRef}
                     autoPlay
                     loop
                     muted
                     playsInline
+                    preload="auto"
                     onLoadedData={() => setIsLoading(false)}
                     className={`w-full h-full ${fit === 'contain' ? 'object-contain' : 'object-cover'} transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
                 >

@@ -39,13 +39,13 @@ export default function Navbar() {
                     <Link
                         href="/"
                         onClick={() => setIsOpen(false)}
-                        className="relative group flex items-center gap-2"
+                        className="relative group flex items-center gap-2 ml-4"
                     >
                         <span
-                            className={`text-2xl font-black tracking-tighter uppercase leading-none transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] ${pathname === "/" ? "scale-110 drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" : ""
+                            className={`text-3xl font-[family-name:var(--font-unifraktur)] tracking-[0.05em] leading-none transition-all duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.8)] ${pathname === "/" ? "scale-110 drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]" : ""
                                 }`}
                         >
-                            JORO
+                            Joro
                         </span>
                     </Link>
 

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono, UnifrakturMaguntia } from "next/font/google";
 import "material-symbols/outlined.css";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
@@ -17,9 +17,19 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const unifraktur = UnifrakturMaguntia({
+  weight: "400",
+  variable: "--font-unifraktur",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "JORO",
   description: "JORO - Portfolio",
+  icons: {
+    icon: "/images/logo.ico",
+  },
 };
 
 export default function RootLayout({
@@ -41,7 +51,7 @@ export default function RootLayout({
         )}
       </head>
       <body
-        className={`${inter.variable} ${jetbrainsMono.variable} antialiased bg-black text-white flex flex-col min-h-screen`}
+        className={`${inter.variable} ${jetbrainsMono.variable} ${unifraktur.variable} antialiased bg-black text-white flex flex-col min-h-screen`}
         suppressHydrationWarning
       >
         {children}

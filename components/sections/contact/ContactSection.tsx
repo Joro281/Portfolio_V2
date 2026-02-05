@@ -1,18 +1,38 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState } from "react";
-import CustomMap from "./CustomMap";
+import MapSkeleton from "./MapSkeleton";
+
+const CustomMap = dynamic(() => import("./CustomMap"), {
+    ssr: false,
+    loading: () => <MapSkeleton />
+});
 import { Send } from "lucide-react";
 import TextMorph from "../../shared/TextMorph";
 import SectionReveal from "../../shared/SectionReveal";
 
-export default function ContactSection() {
-    const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
+import { sendEmail } from "@/app/actions";
 
-    const handleSubmit = (e: React.FormEvent) => {
+export default function ContactSection() {
+    const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setStatus("sending");
-        setTimeout(() => setStatus("success"), 1500);
+        setErrorMessage("");
+
+        const formData = new FormData(e.currentTarget);
+        const result = await sendEmail(formData);
+
+        if (result.success) {
+            setStatus("success");
+        } else {
+            setStatus("error");
+            setErrorMessage(result.error || "Failed to transmit message.");
+            setTimeout(() => setStatus("idle"), 5000);
+        }
     };
 
     return (
@@ -39,6 +59,7 @@ export default function ContactSection() {
                                     <label className="font-mono text-[10px] text-neutral-500 uppercase tracking-[0.2em]">{"[ NAME_ID ]"}</label>
                                     <input
                                         type="text"
+                                        name="name"
                                         required
                                         placeholder="TYPE YOUR NAME..."
                                         className="bg-transparent border-b border-neutral-800 py-3 font-mono text-sm focus:outline-none focus:border-white transition-colors placeholder:text-neutral-700"
@@ -48,6 +69,7 @@ export default function ContactSection() {
                                     <label className="font-mono text-[10px] text-neutral-500 uppercase tracking-[0.2em]">{"[ EMAIL_ADDR ]"}</label>
                                     <input
                                         type="email"
+                                        name="email"
                                         required
                                         placeholder="YOUR@ADDRESS.COM"
                                         className="bg-transparent border-b border-neutral-800 py-3 font-mono text-sm focus:outline-none focus:border-white transition-colors placeholder:text-neutral-700"
@@ -59,6 +81,7 @@ export default function ContactSection() {
                                 <label className="font-mono text-[10px] text-neutral-500 uppercase tracking-[0.2em]">{"[ MESSAGE_BUFFER ]"}</label>
                                 <textarea
                                     rows={4}
+                                    name="message"
                                     required
                                     placeholder="INITIALIZING MESSAGE CARGO..."
                                     className="bg-transparent border border-neutral-800 p-4 font-mono text-sm focus:outline-none focus:border-white transition-colors placeholder:text-neutral-700 resize-none min-h-[150px]"
@@ -68,17 +91,24 @@ export default function ContactSection() {
                             <div className="flex justify-end">
                                 <button
                                     type="submit"
-                                    disabled={status !== "idle"}
-                                    className={`group relative flex items-center justify-center px-10 py-5 border border-white font-mono text-sm uppercase tracking-[0.3em] overflow-hidden transition-all duration-500 ${status === "success" ? "bg-green-500 border-green-500 text-black" : "hover:bg-white hover:text-black"}`}
+                                    disabled={status !== "idle" && status !== "error"}
+                                    className={`group relative flex items-center justify-center px-10 py-5 border border-white font-mono text-sm uppercase tracking-[0.3em] overflow-hidden transition-all duration-500 ${status === "success" ? "bg-green-500 border-green-500 text-black" : status === "error" ? "bg-red-500 border-red-500 text-white" : "hover:bg-white hover:text-black"}`}
                                 >
                                     <span className="relative z-10 flex items-center gap-3">
                                         {status === "idle" && <Send className="w-4 h-4 -scale-x-100" />}
+                                        {status === "error" && <span className="text-lg">⚠</span>}
                                         {status === "sending" && <span className="animate-spin text-lg">⚙</span>}
                                         {status === "success" && "MESSAGE TRANSMITTED"}
                                         {status === "idle" && "EXECUTE SEND"}
+                                        {status === "error" && "RETRANSMIT?"}
                                         {status === "sending" && "TRANSMITTING..."}
                                     </span>
                                 </button>
+                                {status === "error" && (
+                                    <div className="absolute -bottom-12 right-0 font-mono text-[10px] text-red-500 uppercase tracking-widest">
+                                        {`// ERROR: ${errorMessage}`}
+                                    </div>
+                                )}
                             </div>
                         </form>
                     </div>
