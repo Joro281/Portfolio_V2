@@ -40,7 +40,7 @@ export default function OsDesktopPersonal() {
     return (
         <div className="relative w-full h-[600px] lg:h-[700px] border border-white/20 bg-black/40 backdrop-blur-sm overflow-hidden flex flex-col font-sans select-none">
             {/* Boot Screen Overlay */}
-            {isBooting && <BootScreen onComplete={() => setIsBooting(false)} />}
+            {isBooting && <BootScreen onCompleteAction={() => setIsBooting(false)} />}
 
             {/* Background Layer */}
             <div className={`absolute inset-0 z-0 opacity-30 pointer-events-none flex items-center justify-center mix-blend-screen transition-opacity duration-1000 ${isBooting ? 'opacity-0' : 'opacity-30'}`}>

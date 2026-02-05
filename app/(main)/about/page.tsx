@@ -123,7 +123,7 @@ export default function AboutPage() {
                 </div>
             </div>
 
-            <div className="w-full max-w-full mx-auto relative z-10">
+            <div className="w-full max-w-full mx-auto relative z-20">
                 {/* Content Area */}
                 <div className="transition-opacity duration-500 ease-in-out px-4">
                     {view === 'professional' ? (

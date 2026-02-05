@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-export default function BootScreen({ onComplete }: { onComplete: () => void }) {
+export default function BootScreen({ onCompleteAction }: { onCompleteAction: () => void }) {
     const [lines, setLines] = useState<string[]>([]);
 
     useEffect(() => {
@@ -26,7 +26,7 @@ export default function BootScreen({ onComplete }: { onComplete: () => void }) {
         const interval = setInterval(() => {
             if (currentIndex >= bootSequence.length) {
                 clearInterval(interval);
-                setTimeout(onComplete, 800); // Small pause after completion
+                setTimeout(onCompleteAction, 800); // Small pause after completion
                 return;
             }
 
@@ -35,7 +35,7 @@ export default function BootScreen({ onComplete }: { onComplete: () => void }) {
         }, 150); // Speed of lines appearing
 
         return () => clearInterval(interval);
-    }, [onComplete]);
+    }, [onCompleteAction]);
 
     return (
         <div className="absolute inset-0 bg-black z-[100] p-8 sm:p-12 font-mono text-xs sm:text-sm text-white/80 leading-relaxed font-bold">

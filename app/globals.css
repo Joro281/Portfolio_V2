@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
-* {
-  cursor: auto !important;
-}
-
-html,
-body {
-  cursor: auto !important;
-}
-
 @custom-variant dark (&:is(.dark *));
+
+/* Force pointer cursor on interactive elements */
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+label {
+  cursor: pointer !important;
+}
+
 
 @theme {
   --color-primary: #ffffff;
