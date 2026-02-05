@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Github, Figma, Globe, FolderOpen, Lock, LucideIcon } from 'lucide-react';
 import TextMorph from '@/components/shared/TextMorph';
 import ScrollProgress from '@/components/layout/ScrollProgress';
 import { projects, getProjectBySlug, getNextProject } from '@/data/projectsData';
 import SectionReveal from '@/components/shared/SectionReveal';
+import MediaLoader from '@/components/shared/MediaLoader';
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params;
@@ -72,9 +72,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             </nav>
 
             {/* Main Content */}
-            <main className="w-full pt-32 pb-24 px-6">
+            <main className="w-full pt-24 pb-20 px-6">
                 {/* Header */}
-                <header className="max-w-[1600px] mx-auto mb-16 md:mb-24 lg:mb-32">
+                <header className="max-w-[1600px] mx-auto mb-12 md:mb-16 lg:mb-20">
                     <div className="text-[12vw] md:text-[10vw] lg:text-[7.5rem] leading-[0.8] font-black tracking-tighter uppercase mb-12 break-words">
                         {project.title.split(' ').map((word, i) => (
                             <div key={i} className="flex">
@@ -156,30 +156,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                     {/* Hero Image/Video */}
                     <SectionReveal delay={0.2} direction="right">
                         <div className="w-full aspect-[16/10] md:aspect-video bg-neutral-900 border border-white/20 flex items-center justify-center relative overflow-hidden group">
-                            {project.video ? (
-                                <video
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                    poster={project.image?.src}
-                                    className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
-                                >
-                                    <source src={project.video} type="video/mp4" />
-                                    Your browser does not support the video tag.
-                                </video>
-                            ) : project.image ? (
-                                <Image
-                                    src={project.image}
-                                    alt={project.title}
-                                    fill
-                                    className="object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
-                                    priority
-                                />
-                            ) : (
-                                <span className="text-white/10 font-mono text-4xl">NO_MEDIA</span>
-                            )}
-                            <div className={`absolute bottom-4 right-4 font-mono text-[10px] uppercase tracking-widest bg-black/60 backdrop-blur-sm px-2 py-1 border border-white/5 transition-colors duration-500 ${project.video ? 'text-neutral-500' : 'text-neutral-200 border-white/20'}`}>
+                            <MediaLoader
+                                video={project.video}
+                                image={project.image}
+                                alt={project.title}
+                                priority
+                                aspectRatio="video"
+                                className="opacity-80 group-hover:opacity-100 transition-opacity duration-700"
+                            />
+                            <div className={`absolute bottom-4 right-4 font-mono text-[10px] uppercase tracking-widest bg-black/60 backdrop-blur-sm px-2 py-1 border border-white/5 transition-colors duration-500 z-20 ${project.video ? 'text-neutral-500' : 'text-neutral-200 border-white/20'}`}>
                                 Fig 0.1 {project.video ? '// MOTION' : '// STATIC'} — Project Overview
                             </div>
                         </div>
@@ -223,30 +208,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 return (
                                     <figure className="w-full -mx-4 md:-mx-12 lg:-mx-24 relative my-8">
                                         <div className="border border-white/20 p-1 bg-neutral-900 overflow-hidden">
-                                            <div className="aspect-[16/10] bg-neutral-800 w-full flex items-center justify-center relative">
-                                                {figure.video ? (
-                                                    <video
-                                                        autoPlay
-                                                        loop
-                                                        muted
-                                                        playsInline
-                                                        poster={figure.image?.src}
-                                                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700"
-                                                    >
-                                                        <source src={figure.video} type="video/mp4" />
-                                                    </video>
-                                                ) : figure.image ? (
-                                                    <Image
-                                                        src={figure.image}
-                                                        alt={figure.caption}
-                                                        fill
-                                                        className={`${figure.fit === 'contain' ? 'object-contain' : 'object-cover'} opacity-80 group-hover:opacity-100 transition-opacity duration-700`}
-                                                    />
-                                                ) : (
-                                                    <span className="material-symbols-outlined text-4xl text-neutral-600">
-                                                        {figure.icon}
-                                                    </span>
-                                                )}
+                                            <div className="aspect-[16/10] bg-neutral-800 w-full flex items-center justify-center relative group">
+                                                <MediaLoader
+                                                    video={figure.video}
+                                                    image={figure.image}
+                                                    alt={figure.caption}
+                                                    fit={figure.fit}
+                                                    aspectRatio="video"
+                                                    className="opacity-80 group-hover:opacity-100 transition-opacity duration-700"
+                                                />
                                             </div>
                                         </div>
                                         <figcaption className={`font-mono text-[10px] mt-3 text-right uppercase tracking-widest transition-colors duration-500 ${figure.video ? 'text-neutral-500' : 'text-neutral-300'}`}>
@@ -288,30 +258,15 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
                                 return (
                                     <figure className="w-full -mx-4 md:-mx-12 lg:-mx-24 relative my-8">
                                         <div className="border border-white/20 p-1 bg-neutral-900 overflow-hidden">
-                                            <div className="aspect-[16/10] bg-neutral-800 w-full flex items-center justify-center relative">
-                                                {figure.video ? (
-                                                    <video
-                                                        autoPlay
-                                                        loop
-                                                        muted
-                                                        playsInline
-                                                        poster={figure.image?.src}
-                                                        className={`w-full h-full ${figure.fit === 'contain' ? 'object-contain' : 'object-cover'} opacity-80 group-hover:opacity-100 transition-opacity duration-700`}
-                                                    >
-                                                        <source src={figure.video} type="video/mp4" />
-                                                    </video>
-                                                ) : figure.image ? (
-                                                    <Image
-                                                        src={figure.image}
-                                                        alt={figure.caption}
-                                                        fill
-                                                        className={`${figure.fit === 'contain' ? 'object-contain' : 'object-cover'} opacity-80 group-hover:opacity-100 transition-opacity duration-700`}
-                                                    />
-                                                ) : (
-                                                    <span className="material-symbols-outlined text-4xl text-neutral-600">
-                                                        {figure.icon}
-                                                    </span>
-                                                )}
+                                            <div className="aspect-[16/10] bg-neutral-800 w-full flex items-center justify-center relative group">
+                                                <MediaLoader
+                                                    video={figure.video}
+                                                    image={figure.image}
+                                                    alt={figure.caption}
+                                                    fit={figure.fit}
+                                                    aspectRatio="video"
+                                                    className="opacity-80 group-hover:opacity-100 transition-opacity duration-700"
+                                                />
                                             </div>
                                         </div>
                                         <figcaption className={`font-mono text-[10px] mt-3 text-right uppercase tracking-widest transition-colors duration-500 ${figure.video ? 'text-neutral-500' : 'text-neutral-300'}`}>

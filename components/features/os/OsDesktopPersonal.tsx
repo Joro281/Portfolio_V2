@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { FileText, Music, Globe } from 'lucide-react';
-import Image from 'next/image';
 import OsWindow from './OsWindow';
+import MediaLoader from '../../shared/MediaLoader';
 import OsIcon from './OsIcon';
 import OsTaskbar from './OsTaskbar';
 import WindowTabs from './WindowTabs';
@@ -155,14 +155,12 @@ export default function OsDesktopPersonal() {
                                     {/* GIF and Stats Row */}
                                     <div className="flex gap-4 items-center mb-6">
                                         {/* Rubick GIF - Left Side */}
-                                        <div className="flex-shrink-0">
-                                            <Image
+                                        <div className="flex-shrink-0 w-32 h-32 relative">
+                                            <MediaLoader
                                                 src="/images/rubick.gif"
                                                 alt="Rubick Dota 2"
-                                                width={128}
-                                                height={128}
-                                                unoptimized
-                                                className="object-contain rounded-sm"
+                                                aspectRatio="square"
+                                                className="rounded-sm"
                                             />
                                         </div>
 
@@ -272,14 +270,11 @@ export default function OsDesktopPersonal() {
 
                                     {/* Cats Image */}
                                     {/* Cats Image */}
-                                    <div className="mb-4 rounded-sm overflow-hidden border border-white/10">
-                                        <Image
+                                    <div className="mb-4 rounded-sm overflow-hidden border border-white/10 aspect-video relative">
+                                        <MediaLoader
                                             src="/images/cats.webp"
                                             alt="Milky and Colette"
-                                            width={0}
-                                            height={0}
-                                            sizes="100vw"
-                                            className="w-full h-auto"
+                                            aspectRatio="video"
                                         />
                                     </div>
                                     <div className="space-y-4">
@@ -369,11 +364,11 @@ export default function OsDesktopPersonal() {
                         {/* Square Artist Frame */}
                         <div className="w-full aspect-square md:w-64 md:h-64 bg-neutral-900 border border-purple-500 relative flex items-center justify-center overflow-hidden">
                             <div className="absolute inset-0">
-                                <Image
+                                <MediaLoader
                                     src="/images/daniel.webp"
                                     alt="Daniel Caesar"
-                                    fill
-                                    className="object-cover opacity-80"
+                                    aspectRatio="square"
+                                    className="opacity-80"
                                 />
                             </div>
                             {/* Corner Accents */}

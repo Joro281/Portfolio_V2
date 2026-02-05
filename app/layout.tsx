@@ -3,7 +3,6 @@ import Script from "next/script";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "material-symbols/outlined.css";
 import "./globals.css";
-import CustomCursor from "@/components/shared/CustomCursor";
 import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({
@@ -19,8 +18,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Joro - Designer Portfolio",
-  description: "Designer Portfolio",
+  title: "JORO",
+  description: "JORO - Portfolio",
 };
 
 export default function RootLayout({
@@ -46,7 +45,6 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
-        <CustomCursor />
         <Analytics />
       </body>
     </html>

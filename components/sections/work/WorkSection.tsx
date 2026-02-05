@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import TextMorph from "@/components/shared/TextMorph";
-import { projects } from "@/data/projectsData";
+import MediaLoader from "@/components/shared/MediaLoader";
+import { projects, ProjectData } from "@/data/projectsData";
 
 export default function WorkSection() {
     const [currentPage, setCurrentPage] = useState(1);
@@ -17,9 +17,9 @@ export default function WorkSection() {
     );
 
     return (
-        <main className="flex-grow pt-32 md:pt-40 w-full max-w-screen-2xl mx-auto px-8">
+        <main className="flex-grow pt-24 md:pt-32 w-full max-w-screen-2xl mx-auto px-8">
             {/* Header */}
-            <header className="relative mb-20 md:mb-32">
+            <header className="relative mb-12 md:mb-20">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end border-b border-white/20 pb-4 gap-4">
                     <h1 className="text-[15vw] md:text-[13vw] lg:text-[12vw] font-black leading-[0.85] uppercase condensed-header">
                         <TextMorph text="SELECTED" />
@@ -45,7 +45,7 @@ export default function WorkSection() {
                 {displayedProjects.map((project, index) => (
                     <div
                         key={project.id}
-                        className="project-row relative border-b border-white py-8 md:py-12 flex flex-col md:flex-row md:items-center gap-6 md:gap-0"
+                        className="project-row group/row relative border-b border-white py-8 md:py-12 flex flex-col md:flex-row md:items-center gap-6 md:gap-0"
                     >
                         {/* ID Number */}
                         <div className="w-full md:w-20 font-mono text-xs opacity-50 md:vertical-text py-2">
@@ -54,7 +54,7 @@ export default function WorkSection() {
 
                         {/* Project Title */}
                         <div className="flex-grow relative order-1 md:order-none">
-                            <Link href={`/work/${project.slug}`} className="w-fit block peer">
+                            <Link href={`/work/${project.slug}`} className="w-fit block">
                                 <TextMorph
                                     as="h2"
                                     text={project.title}
@@ -62,49 +62,6 @@ export default function WorkSection() {
                                     delay={index * 100 + 50}
                                 />
                             </Link>
-
-                            {/* Hover Preview - Linked to Title Hover */}
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-max h-max opacity-0 invisible peer-hover:opacity-100 peer-hover:visible transition-all duration-300 pointer-events-none z-40 hidden md:block">
-                                <div className="relative p-2 bg-zinc-900 border border-white/20 shadow-2xl">
-                                    {project.video ? (
-                                        <div className="relative h-[40vh] aspect-video">
-                                            <video
-                                                autoPlay
-                                                loop
-                                                muted
-                                                playsInline
-                                                className="w-full h-full object-cover opacity-90"
-                                            >
-                                                <source src={project.video} type="video/mp4" />
-                                            </video>
-                                            <div className="absolute bottom-2 right-2 font-mono text-[8px] uppercase tracking-widest bg-black/60 px-2 py-1 border border-white/10">
-                                                Motion Preview
-                                            </div>
-                                        </div>
-                                    ) : project.image ? (
-                                        <div className="relative">
-                                            <Image
-                                                src={project.image}
-                                                alt={project.title}
-                                                className="h-[40vh] w-auto max-w-[50vw] object-contain opacity-90"
-                                                width={500}
-                                                height={300}
-                                                placeholder="blur"
-                                                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA66e6kgAAAABJRU5ErkJggg=="
-                                            />
-                                            <div className="absolute bottom-2 right-2 font-mono text-[8px] uppercase tracking-widest bg-black/60 px-2 py-1 border border-white/10">
-                                                Static Preview
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        <div className="w-[40vw] aspect-[16/10] bg-zinc-900 flex items-center justify-center border border-white/20 p-2">
-                                            <span className="material-symbols-outlined text-6xl opacity-20">
-                                                {project.icon}
-                                            </span>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
                         </div>
 
                         {/* Meta Info */}
@@ -119,6 +76,11 @@ export default function WorkSection() {
                                 <TextMorph text="VIEW" delay={index * 100 + 150} />
                                 <span className="text-lg">→</span>
                             </Link>
+                        </div>
+
+                        {/* Hover Preview - Perfectly Centered in Row */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-max h-max opacity-0 invisible group-hover/row:opacity-100 group-hover/row:visible transition-all duration-300 pointer-events-none z-40 hidden md:block">
+                            <ProjectPreview project={project} />
                         </div>
                     </div>
                 ))}
@@ -140,6 +102,23 @@ export default function WorkSection() {
                 ))}
             </div>
         </main>
+    );
+}
+
+function ProjectPreview({ project }: { project: ProjectData }) {
+    return (
+        <div className="relative p-2 bg-zinc-900 border border-white/20 shadow-2xl overflow-hidden min-w-[300px]">
+            <MediaLoader
+                video={project.video}
+                image={project.image}
+                alt={project.title}
+                aspectRatio={project.video ? 'video' : 'auto'}
+                className="h-56 md:h-64 w-auto max-w-[40vw]"
+            />
+            <div className="absolute bottom-4 right-4 font-mono text-[8px] uppercase tracking-widest bg-black/60 px-2 py-1 border border-white/10 z-20">
+                {project.video ? 'Motion Preview' : 'Static Preview'}
+            </div>
+        </div>
     );
 }
 

@@ -29,8 +29,7 @@ export default function SectionReveal({
             transition: {
                 duration: 0.8,
                 delay: delay,
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                ease: [0.21, 0.47, 0.32, 0.98] as any,
+                ease: [0.21, 0.47, 0.32, 0.98] as [number, number, number, number],
             },
         },
     };

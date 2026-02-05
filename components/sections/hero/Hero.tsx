@@ -25,8 +25,7 @@ export default function Hero() {
       y: 0,
       transition: {
         duration: 0.8,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ease: [0.21, 0.47, 0.32, 0.98] as any,
+        ease: [0.21, 0.47, 0.32, 0.98] as [number, number, number, number],
       },
     },
   };
@@ -38,8 +37,7 @@ export default function Hero() {
       x: 0,
       transition: {
         duration: 0.8,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ease: [0.21, 0.47, 0.32, 0.98] as any,
+        ease: [0.21, 0.47, 0.32, 0.98] as [number, number, number, number],
       },
     },
   };

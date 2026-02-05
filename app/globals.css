@@ -1,14 +1,13 @@
 @import "tailwindcss";
 
 * {
-  cursor: none !important;
+  cursor: auto !important;
 }
 
 html,
 body {
-  cursor: none !important;
+  cursor: auto !important;
 }
-
 
 @custom-variant dark (&:is(.dark *));
 
