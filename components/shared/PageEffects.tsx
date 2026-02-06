@@ -4,10 +4,10 @@ import * as React from "react";
 
 export default function PageEffects({ children }: { children?: React.ReactNode }) {
     return (
-        <div className="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-black">
-            {/* CRT Scanlines */}
+        <div className="fixed inset-0 w-full h-full pointer-events-none z-50 overflow-hidden">
+            {/* CRT Scanlines - Subtle overlay */}
             <div
-                className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.15]"
+                className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.05]"
                 style={{
                     backgroundImage: `
                         repeating-linear-gradient(
@@ -22,8 +22,8 @@ export default function PageEffects({ children }: { children?: React.ReactNode }
                 }}
             />
 
-            {/* Gradient TV Noise */}
-            <div className="absolute inset-0 w-full h-full pointer-events-none gradient-tv-noise opacity-30" style={{ mixBlendMode: 'screen' }} />
+            {/* Hybrid TV Noise - CSS Grains + SVG Fallback */}
+            <div className="absolute inset-0 w-full h-full pointer-events-none gradient-tv-noise opacity-30" />
 
             {/* Vignette Effect */}
             <div
@@ -35,7 +35,7 @@ export default function PageEffects({ children }: { children?: React.ReactNode }
 
             {/* Flickering Light Effect */}
             <div
-                className="absolute inset-0 w-full h-full pointer-events-none animate-tv-flicker opacity-10"
+                className="absolute inset-0 w-full h-full pointer-events-none animate-tv-flicker opacity-5"
                 style={{
                     background: 'rgba(255, 255, 255, 0.02)',
                     mixBlendMode: 'overlay',
